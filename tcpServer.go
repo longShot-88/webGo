@@ -12,6 +12,7 @@ func main () {
 	if err != nil {
 		panic(err)
 	}
+	addr := ln.Addr()
 	defer ln.Close()
 
 	for {
@@ -20,6 +21,7 @@ func main () {
 			panic(err)
 		}
 
+		io.WriteString(conn, fmt.Sprint("connection from:", addr, "\n"))
 		io.WriteString(conn, fmt.Sprint("Hello Andy\n", time.Now(), "\n"))
 
 		conn.Close()
